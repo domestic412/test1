@@ -73,6 +73,7 @@ Widget _buildInputPassword() {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
         body: Container(
       constraints: const BoxConstraints.expand(),
@@ -102,6 +103,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(50.0),
                     ))),
                 onPressed: () {
+                  // Navigator.push(
+                  //     test
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => const HomeScreen(),
+                  //     ));
                   login(UserNameController.text.toString(),
                       PasswordController.text.toString());
                 },
@@ -131,7 +138,6 @@ class _LoginScreenState extends State<LoginScreen> {
         var data = jsonDecode(body.toString());
         print('Login Success');
         print(data['token']);
-        // ignore: use_build_context_synchronously
         Navigator.push(
             context,
             MaterialPageRoute(
