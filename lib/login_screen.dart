@@ -47,7 +47,7 @@ Widget _buildInputUserName() {
       controller: UserNameController,
       style: const TextStyle(fontSize: 18, color: Colors.black54),
       decoration: const InputDecoration(
-          hintText: "UserName",
+          hintText: "User Name",
           hintStyle: TextStyle(fontSize: 16, color: Colors.white)),
     ),
   );
@@ -102,14 +102,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(50.0),
                     ))),
                 onPressed: () {
-                  Navigator.push(
-                      //test
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
-                      ));
-                  // login(UserNameController.text.toString(),
-                  //     PasswordController.text.toString());
+                  login(UserNameController.text.toString(),
+                      PasswordController.text.toString());
                 },
                 child: const Text(
                   'Login',
@@ -121,33 +115,34 @@ class _LoginScreenState extends State<LoginScreen> {
     ));
   }
 
-  // Future<void> login(String shipperCode, String password) async {
-  //   var url = 'https://192.168.7.198:1214/api/Login';
-  //   Map data = {
-  //     'shipperCode': UserNameController.text,
-  //     'password': PasswordController.text
-  //   };
-  //   var body = json.encode(data);
-  //   if (UserNameController.text.isNotEmpty &&
-  //       PasswordController.text.isNotEmpty) {
-  //     var response = await http.post(Uri.parse(url),
-  //         headers: {"Content-Type": "application/json"}, body: body);
-  //     if (response.statusCode == 200) {
-  //       var body = response.body;
-  //       var data = jsonDecode(body.toString());
-  //       print('Login Success');
-  //       print(data['token']);
-  //       Navigator.push(
-  //           context,
-  //           MaterialPageRoute(
-  //             builder: (context) => const HomeScreen(),
-  //           ));
-  //     } else {
-  //       loginAlert.showMyAlert(context);
-  //     }
-  //   } else {
-  //     ScaffoldMessenger.of(context)
-  //         .showSnackBar(SnackBar(content: Text("Invalid")));
-  //   }
-  // }
+  Future<void> login(String shipperCode, String password) async {
+    var url = 'https://192.168.7.198:1214/api/Login';
+    Map data = {
+      'shipperCode': UserNameController.text,
+      'password': PasswordController.text
+    };
+    var body = json.encode(data);
+    if (UserNameController.text.isNotEmpty &&
+        PasswordController.text.isNotEmpty) {
+      var response = await http.post(Uri.parse(url),
+          headers: {"Content-Type": "application/json"}, body: body);
+      if (response.statusCode == 200) {
+        var body = response.body;
+        var data = jsonDecode(body.toString());
+        print('Login Success');
+        print(data['token']);
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomeScreen(),
+            ));
+      } else {
+        loginAlert.showMyAlert(context);
+      }
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Invalid")));
+    }
+  }
 }
