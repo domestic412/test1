@@ -47,7 +47,7 @@ Widget _buildInputUserName() {
       controller: UserNameController,
       style: const TextStyle(fontSize: 18, color: Colors.black54),
       decoration: const InputDecoration(
-          hintText: "UserName",
+          hintText: "User Name",
           hintStyle: TextStyle(fontSize: 16, color: Colors.white)),
     ),
   );
@@ -73,6 +73,7 @@ Widget _buildInputPassword() {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
     return Scaffold(
         body: Container(
       constraints: const BoxConstraints.expand(),
@@ -116,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> login(String shipperCode, String password) async {
-    var url = 'https://192.168.7.198:1214/api/Login';
+    var url = 'http://192.168.7.198:1214/api/Login';
     Map data = {
       'shipperCode': UserNameController.text,
       'password': PasswordController.text
