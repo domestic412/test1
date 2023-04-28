@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart';
+import 'screen/home_screen.dart';
 import 'assets/color.dart';
 
 class TrackingScreen extends StatelessWidget {
-  const TrackingScreen({super.key});
+  const TrackingScreen({Key key});
 
   @override
   Widget build(BuildContext context) {

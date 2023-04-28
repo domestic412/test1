@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.2 <3.0.0'
+  sdk: ">=2.7.0 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -38,8 +38,15 @@ dependencies:
   calendar_date_picker2: ^0.4.9
   http: any
   bottom_sheet: ^3.1.2
-
-
+  google_fonts: ^2.1.0
+  fl_chart: ^0.62.0
+  charts_flutter: ^0.12.0
+  get: ^4.6.5
+  data_table_2: ^2.4.2
+  intl: ^0.18.1
+  uuid: ^3.0.7
+  flutter_svg: ^2.0.5
+  flutter_config: ^2.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -70,7 +77,8 @@ flutter:
   - lib/assets/images/Container1.png
   - lib/assets/images/hats_logo.png
   - lib/assets/images/VesselHA.jpg
-
+  - lib/assets/icons/icons.png
+  - lib/assets/icons/haian.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

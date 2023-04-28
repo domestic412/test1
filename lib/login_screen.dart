@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:http/http.dart' as http;
-import 'package:test1/home_screen.dart';
+import 'package:test1/screen/home_screen.dart';
 
 import 'alert.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({Key key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -141,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const HomeScreen(),
+              builder: (context) => HomeScreen(),
             ));
       } else {
         loginAlert.showMyAlert(context);

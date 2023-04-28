@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import '../alert.dart';
-import '../home_screen.dart';
+import 'home_screen.dart';
 
 class Web_Login_Screen extends StatefulWidget {
-  const Web_Login_Screen({super.key});
+  const Web_Login_Screen({Key key});
 
   @override
   State<Web_Login_Screen> createState() => _Web_Login_ScreenState();
@@ -53,7 +55,7 @@ Widget _buildInputUser() {
               controller: UserNameController,
               style: const TextStyle(fontSize: 18, color: Colors.black87),
               decoration: const InputDecoration(
-                  hintText: "UserName",
+                  hintText: "User Name",
                   hintStyle: TextStyle(fontSize: 16, color: Colors.grey),
                   border: InputBorder.none),
             ),
@@ -129,14 +131,14 @@ class _Web_Login_ScreenState extends State<Web_Login_Screen> {
                               borderRadius: BorderRadius.circular(10.0),
                             ))),
                         onPressed: () {
-                          Navigator.push(
-                              //test
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const HomeScreen(),
-                              ));
-                          // login(UserNameController.text.toString(),
-                          //     PasswordController.text.toString());
+                          // Navigator.push(
+                          //     //test
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => const HomeScreen(),
+                          //     ));
+                          login(UserNameController.text.toString(),
+                              PasswordController.text.toString());
                         },
                         child: const Text(
                           'Login',
@@ -155,33 +157,34 @@ class _Web_Login_ScreenState extends State<Web_Login_Screen> {
     ));
   }
 
-  // Future<void> login(String shipperCode, String password) async {
-  //   var url = 'https://192.168.7.198:1214/api/Login';
-  //   Map data = {
-  //     'shipperCode': UserNameController.text,
-  //     'password': PasswordController.text
-  //   };
-  //   var body = json.encode(data);
-  //   if (UserNameController.text.isNotEmpty &&
-  //       PasswordController.text.isNotEmpty) {
-  //     var response = await http.post(Uri.parse(url),
-  //         headers: {"Content-Type": "application/json"}, body: body);
-  //     if (response.statusCode == 200) {
-  //       var body = response.body;
-  //       var data = jsonDecode(body.toString());
-  //       print('Login Success');
-  //       print(data['token']);
-  //       Navigator.push(
-  //           context,
-  //           MaterialPageRoute(
-  //             builder: (context) => const HomeScreen(),
-  //           ));
-  //     } else {
-  //       loginAlert.showMyAlert(context);
-  //     }
-  //   } else {
-  //     ScaffoldMessenger.of(context)
-  //         .showSnackBar(SnackBar(content: Text("Invalid")));
-  //   }
-  // }
+  Future<void> login(String shipperCode, String password) async {
+    // var url = 'https://localhost:7050/api/Login';
+    var url = 'http://192.168.7.198:1214/auth';
+    Map data = {
+      'shipperCode': UserNameController.text,
+      'password': PasswordController.text
+    };
+    var body = json.encode(data);
+    if (UserNameController.text.isNotEmpty &&
+        PasswordController.text.isNotEmpty) {
+      var response = await http.post(Uri.parse(url),
+          headers: {"Content-Type": "application/json"}, body: body);
+      if (response.statusCode == 200) {
+        var body = response.body;
+        var data = jsonDecode(body.toString());
+        print('Login Success');
+        print(data['token']);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomeScreen(),
+            ));
+      } else {
+        loginAlert.showMyAlert(context);
+      }
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Invalid")));
+    }
+  }
 }

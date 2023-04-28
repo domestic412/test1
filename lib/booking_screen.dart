@@ -13,7 +13,7 @@ String eMon = '';
 String eYear = '';
 
 class BookingScreen extends StatefulWidget {
-  const BookingScreen({Key? key, required this.title}) : super(key: key);
+  const BookingScreen({Key key, this.title}) : super(key: key);
 
   final String title;
 
@@ -22,7 +22,7 @@ class BookingScreen extends StatefulWidget {
 }
 
 class _BookingScreenState extends State<BookingScreen> {
-  List<DateTime?> _rangeDatePickerValueWithDefaultValue = [
+  List<DateTime> _rangeDatePickerValueWithDefaultValue = [
     today,
     today,
   ];
